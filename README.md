@@ -10,7 +10,7 @@
  #### [HTCrashTypeObjectKVO:KVO](#objectAll)
  #### <span id="objectAll">HTCrashTypeObjectAll:对象所有崩溃</span>
     [NSObject ht_interceptObjectAllCrash];
- #### HTCrashTypeAll:所有崩溃
+ #### <span id="all">HTCrashTypeAll:所有崩溃</span>
     [NSArray ht_interceptArrayAllCrash];
     [NSObject ht_interceptObjectAllCrash];
     [NSString ht_interceptStringAllCrash];
