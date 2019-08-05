@@ -2,7 +2,7 @@
 
  HTCrashReporter是一款基于runtime捕获系统常见崩溃的拦截器，可有效防止数组越界，字典插入空值，字符串下标越界，未找到方法等常见崩溃。
  
- #### <span id="stringAll">HTCrashTypeStringAll:字符串所有崩溃</span>
+ #### <span id="jump">HTCrashTypeStringAll:字符串所有崩溃</span>
     NSString *nilString = nil;
     NSString *origin = @"abcdefgh";
     NSLog(@"--%hu",[origin characterAtIndex:20]);
@@ -16,8 +16,7 @@
     [mStr replaceCharactersInRange:NSMakeRange(0, 34) withString:@"asd"];
     [mStr insertString:@"asdsa" atIndex:20];
     [mStr deleteCharactersInRange:NSMakeRange(0, 30)];
- #### HTCrashTypeStringRangeOrIndexOutOfBounds:字符串截取子串越界
-    见 [HTCrashTypeStringAll](#stringAll)
+ #### [HTCrashTypeStringRangeOrIndexOutOfBounds:字符串截取子串越界](#jump)
  #### HTCrashTypeArrayAll:数组所有崩溃
  #### HTCrashTypeArrayIndexBeyondBounds:数组越界
  #### HTCrashTypeArrayAttemptToInsertNilObject:数组插入nil对象
