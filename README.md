@@ -17,7 +17,7 @@
     [mStr insertString:@"asdsa" atIndex:20];
     [mStr deleteCharactersInRange:NSMakeRange(0, 30)];
  #### HTCrashTypeStringRangeOrIndexOutOfBounds:字符串截取子串越界
-    见 HTCrashTypeStringAll(#stringAll)
+    见 [HTCrashTypeStringAll](#stringAll)
  #### HTCrashTypeArrayAll:数组所有崩溃
  #### HTCrashTypeArrayIndexBeyondBounds:数组越界
  #### HTCrashTypeArrayAttemptToInsertNilObject:数组插入nil对象
