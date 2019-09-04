@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param cls 元类对象
  @param originalSel 原始方法
  @param swizzlingSel 替换方法
+ @param exchangeOrNot YES:直接交换 NO:添加后替换
  */
 + (void)ht_swizzleClassMethodForClass:(Class)cls
                      originalSelector:(SEL)originalSel

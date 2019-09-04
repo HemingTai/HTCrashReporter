@@ -12,6 +12,7 @@
 #import "NSArray+Swizzling.h"
 #import "NSString+Swizzling.h"
 #import "NSDictionary+Swizzling.h"
+#import "NSTimer+Swizzling.h"
 
 @implementation HTCrashReporter
 
@@ -47,6 +48,7 @@
                 [NSArray ht_interceptArrayAllCrash];
                 [NSObject ht_interceptObjectAllCrash];
                 [NSString ht_interceptStringAllCrash];
+                [NSTimer ht_interceptTimerAllCrash];
                 [NSDictionary ht_interceptDictionaryAllCrash];
                 break;
         }
@@ -92,7 +94,20 @@
                     swizzlingSelector:(SEL)swizzlingSel {
     Method originalMethod = class_getClassMethod(cls, originalSel);
     Method swizzlingMethod = class_getClassMethod(cls, swizzlingSel);
-    method_exchangeImplementations(originalMethod, swizzlingMethod);
+    
+    Class metaCls = objc_getMetaClass(NSStringFromClass(cls).UTF8String);
+    BOOL addResult = class_addMethod(metaCls,
+                                     originalSel,
+                                     method_getImplementation(swizzlingMethod),
+                                     method_getTypeEncoding(swizzlingMethod));
+    if (addResult) {
+        class_replaceMethod(metaCls,
+                            swizzlingSel,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzlingMethod);
+    }
 }
 
 /**

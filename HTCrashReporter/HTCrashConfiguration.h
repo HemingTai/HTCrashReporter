@@ -18,27 +18,29 @@ UIKIT_EXTERN NSString * const HTCrashReporterBottomSeparator;
 // !!!: ==================== Enums ====================
 
 //! 崩溃类型
-typedef NS_ENUM(NSInteger, HTCrashType) {
+typedef NS_OPTIONS(NSUInteger, HTCrashType) {
     //! 字符串所有崩溃
-    HTCrashTypeStringAll,
+    HTCrashTypeStringAll = 1 << 0,
     //! 字符串截取子串越界
-    HTCrashTypeStringRangeOrIndexOutOfBounds,
+    HTCrashTypeStringRangeOrIndexOutOfBounds = 1 << 1,
     //! 数组所有崩溃
-    HTCrashTypeArrayAll,
+    HTCrashTypeArrayAll = 1 << 2,
     //! 数组越界
-    HTCrashTypeArrayIndexBeyondBounds,
+    HTCrashTypeArrayIndexBeyondBounds = 1 << 3,
     //! 数组插入nil对象
-    HTCrashTypeArrayAttemptToInsertNilObject,
+    HTCrashTypeArrayAttemptToInsertNilObject = 1 << 4,
     //! 字典所有崩溃
-    HTCrashTypeDictionaryAll,
+    HTCrashTypeDictionaryAll = 1 << 5,
     //! 字典插入nil对象
-    HTCrashTypeDictionaryAttemptToInsertNilObject,
+    HTCrashTypeDictionaryAttemptToInsertNilObject = 1 << 6,
     //! 对象所有崩溃
-    HTCrashTypeObjectAll,
+    HTCrashTypeObjectAll = 1 << 7,
     //! KVO
-    HTCrashTypeObjectKVO,
+    HTCrashTypeObjectKVO = 1 << 8,
     //! 未找到方法
-    HTCrashTypeObjectUnrecognizedSelectorSentToInstance,
+    HTCrashTypeObjectUnrecognizedSelectorSentToInstance = 1 << 9,
+    //! 定时器未被清除
+    HTCrashTypeTimerIsNotCleaned = 1 << 10,
     //! 所有崩溃
-    HTCrashTypeAll,
+    HTCrashTypeAll = 1 << 11,
 };
