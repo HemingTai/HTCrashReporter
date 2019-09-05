@@ -68,7 +68,7 @@
 
 + (NSTimer *)ht_timerWithTimeInterval:(NSTimeInterval)timeInterval target:(nonnull id)target selector:(nonnull SEL)selector userInfo:(nullable id)userInfo repeats:(BOOL)repeats {
     if (!repeats) {
-        return [NSTimer ht_scheduledTimerWithTimeInterval:timeInterval target:target selector:selector userInfo:userInfo repeats:repeats];
+        return [NSTimer ht_timerWithTimeInterval:timeInterval target:target selector:selector userInfo:userInfo repeats:repeats];
     }
     HTTimerObject *timerObj = [[HTTimerObject alloc] init];
     timerObj.target = target;
@@ -77,7 +77,7 @@
     timerObj.timeInterval = timeInterval;
     timerObj.targetClassName = [NSString stringWithCString:object_getClassName(target) encoding:NSASCIIStringEncoding];
     timerObj.targetSelectorName = NSStringFromSelector(selector);
-    NSTimer *timer = [NSTimer ht_scheduledTimerWithTimeInterval:timeInterval target:timerObj selector:@selector(fireTimer) userInfo:userInfo repeats:repeats];
+    NSTimer *timer = [NSTimer ht_timerWithTimeInterval:timeInterval target:timerObj selector:@selector(fireTimer) userInfo:userInfo repeats:repeats];
     timerObj.timer = timer;
     return timer;
 }
