@@ -3,6 +3,11 @@
 HTCrashReporter是一款基于runtime捕获系统常见崩溃的拦截器，可有效防止数组越界，字典插入空值，字符串下标越界，未找到方法等常见崩溃。
 目前只做到了拦截常见崩溃，如有其它崩溃可持续添加，在拦截到崩溃后只是暂时的输出了崩溃信息，后续会做成本地文件上传到服务器，以供开发人员修复使用。
 
+## 安装：
+1、支持cocoaPods: 在pod文件中加入 pod 'HTCrashReporter'
+
+2、直接拷贝文件夹到项目
+
  ### 以下是常见崩溃类型：
  
  #### [HTCrashTypeStringRangeOrIndexOutOfBounds:字符串截取子串越界](#stringAll)
