@@ -19,38 +19,29 @@
 + (void)ht_interceptCrashWithType:(HTCrashType)type {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        switch (type) {
-            case HTCrashTypeObjectAll:
-                [NSObject ht_interceptObjectAllCrash];
-                break;
-            case HTCrashTypeObjectKVO:
-                [NSObject ht_interceptObjectCrashCausedByKVO];
-                break;
-            case HTCrashTypeStringAll:
-                [NSString ht_interceptStringAllCrash];
-                break;
-            case HTCrashTypeDictionaryAll:
-                [NSDictionary ht_interceptDictionaryAllCrash];
-                break;
-            case HTCrashTypeArrayAll:
-                [NSArray ht_interceptArrayAllCrash];
-                break;
-            case HTCrashTypeArrayIndexBeyondBounds:
-                [NSArray ht_interceptArrayCrashCausedByIndexBeyondBounds];
-                break;
-            case HTCrashTypeArrayAttemptToInsertNilObject:
-                [NSArray ht_interceptArrayCrashCausedByAttemptToInsertNilObject];
-                break;
-            case HTCrashTypeObjectUnrecognizedSelectorSentToInstance:
-                [NSObject ht_interceptObjectCrashCausedByUnrecognizedSelectorSentToInstance];
-                break;
-            default:
-                [NSArray ht_interceptArrayAllCrash];
-                [NSObject ht_interceptObjectAllCrash];
-                [NSString ht_interceptStringAllCrash];
-                [NSTimer ht_interceptTimerAllCrash];
-                [NSDictionary ht_interceptDictionaryAllCrash];
-                break;
+        if (type & HTCrashTypeStringRangeOrIndexOutOfBounds) {
+            [NSString ht_interceptStringAllCrash];
+        }
+        if (type & HTCrashTypeMutableArrayOwned) {
+            [NSArray ht_interceptMutableArrayCrash];
+        }
+        if (type & HTCrashTypeArrayIndexBeyondBounds) {
+            [NSArray ht_interceptArrayCrashCausedByIndexBeyondBounds];
+        }
+        if (type & HTCrashTypeArrayAttemptToInsertNilObject) {
+            [NSArray ht_interceptArrayCrashCausedByAttemptToInsertNilObject];
+        }
+        if (type & HTCrashTypeObjectKVC) {
+            [NSObject ht_interceptObjectCrashCausedByKVC];
+        }
+        if (type & HTCrashTypeObjectUnrecognizedSelectorSentToInstance) {
+            [NSObject ht_interceptObjectCrashCausedByUnrecognizedSelectorSentToInstance];
+        }
+        if (type & HTCrashTypeTimerIsNotCleaned) {
+            [NSTimer ht_interceptTimerAllCrash];
+        }
+        if (type & HTCrashTypeDictionaryAll) {
+            [NSDictionary ht_interceptDictionaryAllCrash];
         }
     });
 }
@@ -119,9 +110,7 @@
 + (void)ht_catchException:(NSException *)exception
             withCrashType:(HTCrashType)type {
     [self ht_handleCatchedException:exception withAction:^(NSString * _Nonnull message){
-#if DEBUG
-                NSLog(@"%@", message);
-#endif
+        NSLog(@"%@", message);
     }];
 }
 

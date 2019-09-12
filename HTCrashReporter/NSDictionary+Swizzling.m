@@ -40,7 +40,7 @@
     @try {
         instance = [self ht_dictionaryWithObjects:objects forKeys:keys count:cnt];
     } @catch (NSException *exception) {
-        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeStringRangeOrIndexOutOfBounds];
+        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeDictionaryAll];
         //去掉值为nil的数据，然后重新初始化字典
         NSUInteger index = 0;
         id  _Nonnull __unsafe_unretained newObjects[cnt];
@@ -62,7 +62,7 @@
     @try {
         [self ht_setObject:anObject forKey:aKey];
     } @catch (NSException *exception) {
-        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeDictionaryAttemptToInsertNilObject];
+        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeDictionaryAll];
     } @finally {
         
     }
@@ -72,7 +72,7 @@
     @try {
         [self ht_setObject:obj forKeyedSubscript:key];
     } @catch (NSException *exception) {
-        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeDictionaryAttemptToInsertNilObject];
+        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeDictionaryAll];
     } @finally {
         
     }
@@ -82,7 +82,7 @@
     @try {
         [self ht_removeObjectForKey: aKey];
     } @catch (NSException *exception) {
-        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeDictionaryAttemptToInsertNilObject];
+        [HTCrashReporter ht_catchException:exception withCrashType:HTCrashTypeDictionaryAll];
     } @finally {
         
     }

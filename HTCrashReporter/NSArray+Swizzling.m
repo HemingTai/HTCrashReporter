@@ -14,20 +14,25 @@
 + (void)ht_interceptArrayAllCrash {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         [self ht_interceptArrayCrashCausedByIndexBeyondBounds];
         [self ht_interceptArrayCrashCausedByAttemptToInsertNilObject];
-        
+        [self ht_interceptMutableArrayCrash];
+    });
+}
+
++ (void)ht_interceptMutableArrayCrash {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         Class clsM = NSClassFromString(@"__NSArrayM");
         
         [HTCrashReporter ht_swizzleInstanceMethodForClass:clsM
                                          originalSelector:@selector(setObject:atIndexedSubscript:)
                                         swizzlingSelector:@selector(ht_setObject:atIndexedSubscript:)];
-
+        
         [HTCrashReporter ht_swizzleInstanceMethodForClass:clsM
                                          originalSelector:@selector(removeObjectAtIndex:)
                                         swizzlingSelector:@selector(ht_removeObjectAtIndex:)];
-
+        
         [HTCrashReporter ht_swizzleInstanceMethodForClass:clsM
                                          originalSelector:@selector(insertObject:atIndex:)
                                         swizzlingSelector:@selector(ht_insertObject:atIndex:)];

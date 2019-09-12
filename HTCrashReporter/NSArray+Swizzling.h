@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 //! 拦截数组所有崩溃（包含可变数组）
 + (void)ht_interceptArrayAllCrash;
 
+//! 拦截可变数组特有崩溃
++ (void)ht_interceptMutableArrayCrash;
+
 //! 拦截数组由于越界引起的崩溃（包含可变数组）
 + (void)ht_interceptArrayCrashCausedByIndexBeyondBounds;
 
